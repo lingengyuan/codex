@@ -510,6 +510,11 @@ impl App {
         self.chat_widget.local_settings.tui.resume_cwd = self.local_settings.tui.resume_cwd;
         self.chat_widget.local_settings.tui.status_line_provider =
             self.local_settings.tui.status_line_provider.clone();
+        self.chat_widget.local_settings.tui.prompt_suggestions =
+            self.local_settings.tui.prompt_suggestions;
+        if !self.local_settings.tui.prompt_suggestions {
+            self.chat_widget.clear_prompt_suggestion();
+        }
         self.config = config;
         self.chat_widget.sync_plugin_mentions_config(&self.config);
         Ok(())

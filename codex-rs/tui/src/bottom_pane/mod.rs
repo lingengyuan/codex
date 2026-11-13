@@ -1116,6 +1116,7 @@ impl BottomPane {
                 self.request_redraw();
             }
         } else {
+            self.composer.clear_prompt_suggestion();
             let needs_redraw = self.composer.handle_paste(pasted);
             if has_pasted_text {
                 self.record_composer_activity_at(Instant::now());
@@ -1417,6 +1418,30 @@ impl BottomPane {
     }
 
     // esc_backtrack_hint_visible removed; hints are controlled internally.
+
+    pub(crate) fn set_prompt_suggestion(
+        &mut self,
+        request: crate::prompt_suggestions::SuggestionRequest,
+    ) {
+        self.composer.set_prompt_suggestion(request);
+    }
+
+    pub(crate) fn has_prompt_suggestion(&self) -> bool {
+        self.composer.has_prompt_suggestion()
+    }
+
+    pub(crate) fn clear_prompt_suggestion(&mut self) {
+        self.composer.clear_prompt_suggestion();
+    }
+
+    pub(crate) fn apply_prompt_suggestion(
+        &mut self,
+        request: &crate::prompt_suggestions::SuggestionRequest,
+        text: Option<String>,
+    ) {
+        self.composer.apply_prompt_suggestion(request, text);
+        self.request_redraw();
+    }
 
     pub fn set_task_running(&mut self, running: bool) {
         let was_running = self.is_task_running;

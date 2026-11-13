@@ -945,6 +945,11 @@ pub struct Tui {
     #[serde(default = "default_true")]
     pub auto_recap: bool,
 
+    /// Generate one extra model request after each successful turn to suggest the next message.
+    /// The request uses normal account usage. Defaults to `false`.
+    #[serde(default)]
+    pub prompt_suggestions: bool,
+
     /// When true, disables burst-paste detection for typed input entirely.
     /// All characters are inserted as they are received, and no buffering
     /// or placeholder replacement will occur for fast keypress bursts.

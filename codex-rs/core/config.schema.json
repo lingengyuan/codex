@@ -5630,6 +5630,11 @@
           "description": "Saved inputs keyed by a single digit (`0` through `9`).",
           "type": "object"
         },
+        "prompt_suggestions": {
+          "default": false,
+          "description": "Generate one extra model request after each successful turn to suggest the next message. The request uses normal account usage. Defaults to `false`.",
+          "type": "boolean"
+        },
         "question_esc_back": {
           "default": true,
           "description": "Escape returns from async questions to the composer, preserving the answer draft.",

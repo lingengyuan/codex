@@ -257,7 +257,11 @@ impl ChatComposer {
             .unwrap_or(u16::MAX);
         let remote_images_separator = u16::from(remote_images_height > 0);
         let input_height = [
-            self.draft.textarea.desired_height(inner_width),
+            self.prompt_suggestion_lines(inner_width, options)
+                .map_or_else(
+                    || self.draft.textarea.desired_height(inner_width),
+                    |lines| u16::try_from(lines.len()).unwrap_or(u16::MAX),
+                ),
             remote_images_height,
             remote_images_separator,
             2,
